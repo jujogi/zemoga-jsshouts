@@ -5,6 +5,7 @@ import { Strategy as FacebookStrategy } from "passport-facebook";
 dotenv.config();
 
 const { FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET, CALLBACK_URL } = process.env;
+const SCOPE = ['user_friends', 'email', 'user_posts', 'user_photos'];
 
 const fbOptions = {
     clientID: FACEBOOK_CLIENT_ID,
@@ -38,7 +39,9 @@ passport.deserializeUser(function(obj, done) {
     done(null, obj);
 });
 
-const authFacebook = passport.authenticate("facebook");
+const authFacebook = passport.authenticate("facebook", {
+    scope: SCOPE
+});
 const authFacebookCallback = passport.authenticate("facebook", {
     successRedirect: "/home",
     failureRedirect: "/login"

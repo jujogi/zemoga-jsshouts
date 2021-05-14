@@ -6,6 +6,7 @@ import morgan from "morgan";
 import helmet from "helmet";
 import mongoose from "mongoose";
 import { json, urlencoded } from "body-parser";
+import { getProfileDetails } from "./controllers/profile.controller"
 import { authFacebook, authFacebookCallback } from "./strategies/facebook.strategy";
 import userRouter from "./routes/user.route.js";
 
@@ -33,6 +34,8 @@ app.get('/facebook/callback', authFacebookCallback);
 
 app.get("/home", (req, res) => {
     const { user } = req.session.passport;
+    req.session.accessToken = user.accessToken;
+    req.session.save();
     res.status(200).send(user);
 
     //TODO: Validate user's session
@@ -41,8 +44,11 @@ app.get("/home", (req, res) => {
 });
 app.use("/user", userRouter);
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true });
+app.get("/profile", getProfileDetails);
+// TODO : How to add a post in my wall
+// can i do another things?
 
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true });
 
 app.listen(process.env.PORT, () => {
     console.log(`Listening on http://localhost:${process.env.PORT}`);
