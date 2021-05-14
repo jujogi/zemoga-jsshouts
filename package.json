@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.21.1",
+    "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "core-js": "^3.6.5",
@@ -21,6 +22,9 @@
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "helmet": "^4.6.0",
+    "mongoose": "^5.12.9",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",
