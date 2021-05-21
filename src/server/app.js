@@ -8,7 +8,8 @@ import mongoose from "mongoose";
 import { json, urlencoded } from "body-parser";
 import { getProfileDetails } from "./controllers/profile.controller"
 import { authFacebook, authFacebookCallback } from "./strategies/facebook.strategy";
-import userRouter from "./routes/user.route.js";
+import userRouter from "./routes/user.route";
+import localAuthRouter from "./routes/local-auth.route"
 
 const app = express();
 
@@ -28,6 +29,8 @@ app.use(
         }
     })
 );
+
+app.use("/local-auth", localAuthRouter);
 
 app.get("/facebook", authFacebook);
 app.get('/facebook/callback', authFacebookCallback);
