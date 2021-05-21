@@ -10,6 +10,7 @@ import { getProfileDetails } from "./controllers/profile.controller"
 import { authFacebook, authFacebookCallback } from "./strategies/facebook.strategy";
 import userRouter from "./routes/user.route";
 import localAuthRouter from "./routes/local-auth.route"
+import { authJwt } from "./strategies/jwt.strategy";
 
 const app = express();
 
@@ -45,7 +46,7 @@ app.get("/home", (req, res) => {
     // Persist the session
     // Create the CORS endpoints
 });
-app.use("/user", userRouter);
+app.use("/user", authJwt, userRouter);
 
 app.get("/profile", getProfileDetails);
 // TODO : How to add a post in my wall

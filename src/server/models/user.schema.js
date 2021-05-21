@@ -15,6 +15,9 @@ const userSchema = new mongoose.Schema(
     provider: {
       type: String,
     },
+    name: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
