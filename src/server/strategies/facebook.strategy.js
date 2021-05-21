@@ -2,6 +2,8 @@ import dotenv from "dotenv";
 import passport from "passport";
 import { Strategy as FacebookStrategy } from "passport-facebook";
 
+import { findOrCreate } from "../services/user.service";
+
 dotenv.config();
 
 const { FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET, CALLBACK_URL } = process.env;
@@ -26,6 +28,10 @@ const facebookStrategy = new FacebookStrategy(
                 email,
                 accessToken,
             };
+            findOrCreate({
+                email,
+                name: displayName,
+            });
             return done(null, user);
         } catch (e) {
             return done(null, false);
