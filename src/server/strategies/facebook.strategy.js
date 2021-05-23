@@ -28,7 +28,7 @@ const facebookStrategy = new FacebookStrategy(
                 email,
                 accessToken,
             };
-            findOrCreate({
+            await findOrCreate({
                 email,
                 name: displayName,
             });
@@ -53,7 +53,7 @@ const authFacebook = passport.authenticate("facebook", {
     scope: SCOPE
 });
 const authFacebookCallback = passport.authenticate("facebook", {
-    successRedirect: "/home",
+    successRedirect: "/callback",
     failureRedirect: "/login"
 });
 
