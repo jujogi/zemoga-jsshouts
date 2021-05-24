@@ -9,14 +9,14 @@ export const signup = async (req, res) => {
   try {
     const user = await User.create(req.body);
     const token = newToken(user);
-    return res.status(201).send({ token });
+    return res.status(201).send({ token, user });
   } catch (e) {
     return res.status(500).send({ message: "Email is already used." }).end();
   }
 };
 
 export const signin = async (req, res) => {
-  return res.status(201).send({ token: newToken(req.user) });
+  return res.status(201).send({ token: newToken(req.user), user: req.user });
 };
 
 export const newToken = (user) => {

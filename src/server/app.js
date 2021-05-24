@@ -12,12 +12,31 @@ import userRouter from "./routes/user.route";
 import localAuthRouter from "./routes/local-auth.route"
 import { authJwt } from "./strategies/jwt.strategy";
 
+const corsOptions = {
+    origin: [process.env.CLIENT_URL],
+    credentials: true,
+}
+
+const authMiddleware = (req, res, next) => {
+    try {
+        const { user } = req.session.passport;
+        if (user) {
+            req.user = user;
+            next();
+            return;
+        }
+        authJwt(req, res, next);
+    } catch {
+        authJwt(req, res, next);
+    }
+}
+
 const app = express();
 
 app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use(helmet());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(morgan("dev"));
 app.use(passport.initialize());
 app.use(
@@ -27,7 +46,8 @@ app.use(
         secret: "jsshouts",
         cookie: {
             secure: false
-        }
+        },
+        name: "jsshouts.session"
     })
 );
 
@@ -37,6 +57,7 @@ app.get("/facebook", authFacebook);
 app.get('/facebook/callback', authFacebookCallback);
 
 app.get("/home", (req, res) => {
+    console.log(req.session);
     const { user } = req.session.passport;
     req.session.accessToken = user.accessToken;
     req.session.save();
@@ -46,7 +67,28 @@ app.get("/home", (req, res) => {
     // Persist the session
     // Create the CORS endpoints
 });
-app.use("/user", authJwt, userRouter);
+app.get("/callback", (req, res) => {
+    console.log(req.session);
+    const { user } = req.session.passport;
+    req.session.accessToken = user.accessToken;
+    req.session.user = user;
+    req.session.save();
+    res.redirect(process.env.CLIENT_URL)
+
+    //TODO: Validate user's session
+    // Persist the session
+    // Create the CORS endpoints
+});
+app.get("/profile", authMiddleware, (req, res) => {
+    const { user } = req;
+    return res.status(200).send(user);
+});
+app.get("/logout", (req, res) => {
+    req.session.destroy();
+    res.redirect(process.env.CLIENT_URL)
+});
+
+app.use("/user", authMiddleware, userRouter);
 
 app.get("/profile", getProfileDetails);
 // TODO : How to add a post in my wall
