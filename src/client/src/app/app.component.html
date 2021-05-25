@@ -7,6 +7,30 @@
   </a>
   <span class="spacer"></span>
   <a
+    *ngIf="isAuthenticated$ | async"
+    [routerLink]="['/photos']"
+    mat-button
+    class="nav-button"
+  >
+    Photos
+  </a>
+  <a
+    *ngIf="isAuthenticated$ | async"
+    [routerLink]="['/posts']"
+    mat-button
+    class="nav-button"
+  >
+    Posts
+  </a>
+  <a
+    *ngIf="isAuthenticated$ | async"
+    [routerLink]="['/create-post']"
+    mat-button
+    class="nav-button"
+  >
+    Add Post
+  </a>
+  <a
     *ngIf="!(isAuthenticated$ | async)"
     [routerLink]="['/signup']"
     mat-button

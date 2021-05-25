@@ -1,22 +1,37 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CreatePostPage } from './pages/create-post/create-post.page';
 
-import { HomeComponent } from './components/home/home.component';
-import { SigninComponent } from './components/signin/signin.component';
-import { SignupComponent } from './components/signup/signup.component';
+import { HomePage } from './pages/home/home.page';
+import { PhotosPage } from './pages/photos/photos.page';
+import { PostsPage } from './pages/posts/posts.page';
+import { SigninPage } from './pages/signin/signin.page';
+import { SignupPage } from './pages/signup/signup.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: HomePage,
   },
   {
     path: 'signup',
-    component: SignupComponent,
+    component: SignupPage,
   },
   {
     path: 'signin',
-    component: SigninComponent,
+    component: SigninPage,
+  },
+  {
+    path: 'posts',
+    component: PostsPage,
+  },
+  {
+    path: 'photos',
+    component: PhotosPage,
+  },
+  {
+    path: 'create-post',
+    component: CreatePostPage,
   },
 ];
 

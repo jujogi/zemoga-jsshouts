@@ -7,9 +7,9 @@ import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-signin',
-  templateUrl: './signin.component.html',
+  templateUrl: './signin.page.html',
 })
-export class SigninComponent {
+export class SigninPage {
   form: FormGroup;
   loginInvalid = false;
   formSubmitAttempt = false;

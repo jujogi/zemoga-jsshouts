@@ -9,18 +9,29 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { AuthService } from './services/auth.service';
-import { SignupComponent } from './components/signup/signup.component';
-import { HomeComponent } from './components/home/home.component';
-import { SigninComponent } from './components/signin/signin.component';
+import { SignupPage } from './pages/signup/signup.page';
+import { HomePage } from './pages/home/home.page';
+import { SigninPage } from './pages/signin/signin.page';
 import { UsersListComponent } from './components/users-list/users-list.component';
+import { PostsPage } from './pages/posts/posts.page';
+import { FacebookService } from './services/facebook.service';
+import { PostsListComponent } from './components/posts-list/posts-list.component';
+import { PhotosListComponent } from './components/photos-list/photos-list.component';
+import { PhotosPage } from './pages/photos/photos.page';
+import { CreatePostPage } from './pages/create-post/create-post.page';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignupComponent,
-    HomeComponent,
-    SigninComponent,
-    UsersListComponent
+    SignupPage,
+    HomePage,
+    SigninPage,
+    UsersListComponent,
+    PostsPage,
+    PostsListComponent,
+    PhotosPage,
+    PhotosListComponent,
+    CreatePostPage,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +43,7 @@ import { UsersListComponent } from './components/users-list/users-list.component
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, FacebookService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
