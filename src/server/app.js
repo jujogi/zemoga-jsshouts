@@ -76,9 +76,9 @@ app.get("/logout", (req, res) => {
 
 app.use("/user", authMiddleware, userRouter);
 
-app.get("/me", getMyProfile);
-app.get("/me/posts", getMyPosts);
-app.get("/me/photos", getMyPhotos);
+app.get("/me", authMiddleware, getMyProfile);
+app.get("/me/posts", authMiddleware, getMyPosts);
+app.get("/me/photos", authMiddleware, getMyPhotos);
 
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true });
