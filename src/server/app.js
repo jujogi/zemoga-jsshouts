@@ -20,6 +20,8 @@ const corsOptions = {
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use(helmet());
@@ -32,7 +34,7 @@ app.use(
         saveUninitialized: false,
         secret: "jsshouts",
         cookie: {
-            secure: false
+            secure: true
         },
         name: "jsshouts.session"
     })
