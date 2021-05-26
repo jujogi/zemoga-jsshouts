@@ -7,7 +7,7 @@ import { findOrCreate } from "../services/user.service";
 dotenv.config();
 
 const { FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET, CALLBACK_URL } = process.env;
-const SCOPE = ['user_friends', 'email', 'user_posts', 'user_photos'];
+const SCOPE = ['email', 'user_posts', 'user_photos'];
 
 const fbOptions = {
     clientID: FACEBOOK_CLIENT_ID,
