@@ -63,7 +63,7 @@ app.get("/callback", (req, res) => {
     req.session.user = user;
     req.session.save();
     console.log(req.cookies);
-    res.cookie("jsshouts.session", req.cookies["jsshouts.session"]);
+    res.cookie("jsshouts.session", req.cookie["jsshouts.session"]);
     res.redirect(process.env.CLIENT_URL)
 });
 
