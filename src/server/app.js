@@ -6,6 +6,8 @@ import morgan from "morgan";
 import helmet from "helmet";
 import mongoose from "mongoose";
 import { json, urlencoded } from "body-parser";
+import cookieParser from "cookie-parser";
+
 import { getMyProfile, getMyPosts, getMyPhotos } from "./services/facebook.service";
 import { authFacebook, authFacebookCallback } from "./strategies/facebook.strategy";
 import userRouter from "./routes/user.route";
@@ -40,6 +42,7 @@ app.use(
         name: "jsshouts.session"
     })
 );
+app.use(cookieParser());
 
 app.use("/local-auth", localAuthRouter);
 
@@ -64,7 +67,7 @@ app.get("/callback", (req, res) => {
     req.session.user = user;
     req.session.save();
     console.log(req);
-    console.log(req.session.cookie);
+    console.log(req.cookies);
     res.cookie("jsshouts.session", req.cookies["jsshouts.session"]);
     res.redirect(process.env.CLIENT_URL)
 });
