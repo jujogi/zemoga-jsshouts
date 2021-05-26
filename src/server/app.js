@@ -23,6 +23,9 @@ const corsOptions = {
 const app = express();
 
 app.set('trust proxy', 1);
+const location = `${process.cwd()}/src/server/public`;
+console.log(process.cwd());
+app.use(express.static(location));
 
 app.use(json());
 app.use(urlencoded({ extended: false }));
@@ -43,6 +46,10 @@ app.use(
     })
 );
 app.use(cookieParser());
+
+app.get('/', (req, res) => {
+    res.sendFile('./public/index.html', { root: __dirname });
+});
 
 app.use("/local-auth", localAuthRouter);
 
@@ -69,7 +76,7 @@ app.get("/callback", (req, res) => {
     console.log(req);
     console.log(req.cookies);
     res.cookie("jsshouts.session", req.cookies["jsshouts.session"]);
-    res.redirect(process.env.CLIENT_URL)
+    res.redirect("/")
 });
 
 app.get("/profile", authMiddleware, (req, res) => {
