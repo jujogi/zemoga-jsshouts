@@ -34,9 +34,8 @@ app.use(
         saveUninitialized: false,
         secret: "jsshouts",
         cookie: {
-            path: "/",
             secure: true,
-            httpOnly: true
+            sameSite: "none"
         },
         name: "jsshouts.session"
     })
@@ -66,7 +65,7 @@ app.get("/callback", (req, res) => {
     req.session.save();
     console.log(req);
     console.log(req.session.cookie);
-    res.cookie("jsshouts.session", req.session.cookie);
+    res.cookie("jsshouts.session", req.cookies["jsshouts.session"]);
     res.redirect(process.env.CLIENT_URL)
 });
 
