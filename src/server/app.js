@@ -30,7 +30,7 @@ app.use(morgan("dev"));
 app.use(passport.initialize());
 app.use(
     expressSession({
-        resave: true,
+        resave: false,
         saveUninitialized: false,
         secret: "jsshouts",
         cookie: {
