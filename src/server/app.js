@@ -64,8 +64,9 @@ app.get("/callback", (req, res) => {
     req.session.accessToken = user.accessToken;
     req.session.user = user;
     req.session.save();
-    console.log(req.cookies);
-    res.cookie("jsshouts.session", req.cookies["jsshouts.session"]);
+    console.log(req);
+    console.log(req.session.cookie);
+    res.cookie("jsshouts.session", req.session.cookie);
     res.redirect(process.env.CLIENT_URL)
 });
 
