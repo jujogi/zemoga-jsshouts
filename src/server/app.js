@@ -81,7 +81,7 @@ app.get("/me/posts", authMiddleware, getMyPosts);
 app.get("/me/photos", authMiddleware, getMyPhotos);
 
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.listen(process.env.PORT, () => {
     console.log(`Listening on http://localhost:${process.env.PORT}`);
