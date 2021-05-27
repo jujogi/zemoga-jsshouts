@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://localhost:3002/',
+  apiUrl: 'http://js-shouts-zemoga.herokuapp.com/',
   cookieName: 'jsshouts.session'
 };
