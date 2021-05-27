@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CreatePostPage } from './pages/create-post/create-post.page';
 
 import { HomePage } from './pages/home/home.page';
 import { PhotosPage } from './pages/photos/photos.page';
 import { PostsPage } from './pages/posts/posts.page';
 import { SigninPage } from './pages/signin/signin.page';
 import { SignupPage } from './pages/signup/signup.page';
+import { UsersPage } from './pages/users/users.page';
 
 const routes: Routes = [
   {
@@ -30,8 +30,8 @@ const routes: Routes = [
     component: PhotosPage,
   },
   {
-    path: 'create-post',
-    component: CreatePostPage,
+    path: 'users',
+    component: UsersPage,
   },
 ];
 

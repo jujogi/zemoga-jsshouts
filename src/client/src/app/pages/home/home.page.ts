@@ -1,27 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FacebookService } from 'src/app/services/facebook.service';
 
-import { IUser } from '../../models/user';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
 })
-export class HomePage {
-  user: IUser;
-  users$: Observable<any>;
+export class HomePage implements OnInit {
+  isAuthenticated$: Observable<boolean>;
 
-  constructor(
-    private authService: AuthService,
-    private facebookService: FacebookService
-  ) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    this.users$ = this.authService.getUsers();
-
-    this.facebookService.getProfile()
-      .subscribe(profile => console.log(profile));
+    this.isAuthenticated$ = this.authService.isAuthenticated$;
   }
 }

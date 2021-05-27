@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-signin',
-  templateUrl: './signin.page.html',
+  templateUrl: './signin.page.html'
 })
 export class SigninPage {
   form: FormGroup;

@@ -14,12 +14,14 @@ export class AppComponent implements OnInit {
   title = 'Zemoga JsShoutouts';
   user: IUser;
   isAuthenticated$: Observable<boolean>;
+  localAuth: boolean;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
     this.authService.getUser().subscribe();
     this.authService.user$.subscribe(user => this.user = user);
+    this.authService.localAuthentication$.subscribe(localAuth => this.localAuth = localAuth);
     this.isAuthenticated$ = this.authService.isAuthenticated$;
   }
 

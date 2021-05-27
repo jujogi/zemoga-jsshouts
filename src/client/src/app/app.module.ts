@@ -18,7 +18,7 @@ import { FacebookService } from './services/facebook.service';
 import { PostsListComponent } from './components/posts-list/posts-list.component';
 import { PhotosListComponent } from './components/photos-list/photos-list.component';
 import { PhotosPage } from './pages/photos/photos.page';
-import { CreatePostPage } from './pages/create-post/create-post.page';
+import { UsersPage } from './pages/users/users.page';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { CreatePostPage } from './pages/create-post/create-post.page';
     PostsListComponent,
     PhotosPage,
     PhotosListComponent,
-    CreatePostPage,
+    UsersPage
   ],
   imports: [
     BrowserModule,

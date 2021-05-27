@@ -3,10 +3,8 @@
     <h2>Home</h2>
   </mat-card-title>
   <mat-card-content>
-    <app-users-list
-      *ngIf="(users$ | async)"
-      [users]="users$ | async"
-    ></app-users-list>
-    <mat-spinner *ngIf="!(users$ | async)"></mat-spinner>
+    <span [style.marginTop.px]="50" *ngIf="isAuthenticated$ | async">
+      You're Authenticated
+    </span>
   </mat-card-content>
 </mat-card>

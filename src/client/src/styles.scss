@@ -4,7 +4,7 @@ html,
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background: #303030;
+  background: #fff;
   margin: 0;
   height: 100%;
   overflow: auto;
@@ -21,4 +21,19 @@ mat-card-actions {
 mat-card {
   width: calc(100% - 70px);
   height: calc(100% - 70px);
+  background: #2F0B1F !important;
+  color: white !important;
+}
+
+.header-title {
+  margin-bottom: 50px !important;
+}
+
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+  background-color: #55BA52;
+}
+
+.mat-toolbar.mat-primary {
+  background: #2F0B1F;
+  color: #fff;
 }

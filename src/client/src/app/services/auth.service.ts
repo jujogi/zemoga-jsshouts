@@ -10,9 +10,14 @@ import { ILocalAuth } from '../models/local-auth';
 @Injectable()
 export class AuthService {
   _user$ = new Subject<IUser>();
+  _localAuthentication$ = new Subject<boolean>();
 
   get isAuthenticated$(): Observable<boolean> {
     return this._user$.asObservable().pipe(map(user => !!user));
+  }
+
+  get localAuthentication$(): Observable<boolean> {
+    return this._localAuthentication$.asObservable().pipe(map(user => user));
   }
 
   get user$(): Observable<IUser> {
@@ -52,6 +57,7 @@ export class AuthService {
     ).pipe(tap(({ token, user }: ILocalAuth) => {
       this.setJwtToken(token);
       this._user$.next(user);
+      this._localAuthentication$.next(true);
     }));
   }
 
@@ -62,6 +68,7 @@ export class AuthService {
     ).pipe(tap(({ token, user }: ILocalAuth) => {
       this.setJwtToken(token);
       this._user$.next(user);
+      this._localAuthentication$.next(true);
     }));
   }
 
