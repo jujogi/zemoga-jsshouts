@@ -14,11 +14,9 @@ const jwtOpts = {
 const jwtStrategy = new JWTStrategy(jwtOpts, async (payload, done) => {
   try {
     const user = await User.findOne({ email: payload.email });
-
     if (!user) {
       return done(null, false);
     }
-
     return done(null, user);
   } catch (e) {
     return done(e, false);
