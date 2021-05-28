@@ -1,23 +1,22 @@
 import dotenv from "dotenv";
 import passport from "passport";
 import { Strategy as FacebookStrategy } from "passport-facebook";
-
 import { findOrCreate } from "../services/user.service";
 
 dotenv.config();
 
 const { FACEBOOK_CLIENT_ID, FACEBOOK_CLIENT_SECRET, CALLBACK_URL } = process.env;
-const SCOPE = ['user_friends', 'email', 'user_posts', 'user_photos'];
 
-const fbOptions = {
+const FB_OPTIONS = {
     clientID: FACEBOOK_CLIENT_ID,
     clientSecret: FACEBOOK_CLIENT_SECRET,
     callbackURL: CALLBACK_URL,
     profileFields: ['id', 'emails', 'displayName']
 };
+const SCOPE = ['email', 'user_posts', 'user_photos'];
 
 const facebookStrategy = new FacebookStrategy(
-    fbOptions,
+    FB_OPTIONS,
     async (accessToken, refreshToken, profile, done) => {
         const { id, displayName, emails } = profile;
         const [{ value: email }] = emails;
