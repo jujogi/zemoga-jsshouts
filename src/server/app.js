@@ -9,7 +9,8 @@ import cookieParser from "cookie-parser";
 
 // Midleware & Controllers
 import { authMiddleware } from "./middleware/auth.middleware";
-import { saveSession, destroySession } from "./controllers/session.controller";
+import { saveSession, destroySession } from "./middleware/session.middleware";
+
 // Routes
 import facebookRouter from "./routes/facebook.route";
 import userRouter from "./routes/user.route";
@@ -50,6 +51,7 @@ app.get("/callback", saveSession);
 // Get users list
 app.use("/user", authMiddleware, userRouter);
 
+// Log out
 app.get("/logout", destroySession);
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
